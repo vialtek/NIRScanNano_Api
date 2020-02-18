@@ -14,8 +14,14 @@ const (
 func main() {
 	log.Println("NIRScanNano API started...")
 
-	device := usb.Connect(VendorID, ProductID)
-	if device != nil {
-		usb.TivaTemp(device)
+	var err = usb.Connect(VendorID, ProductID)
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	if usb.Connected() {
+		usb.TivaTemp()
+	}
+
+	usb.Close()
 }
