@@ -23,6 +23,8 @@ func main() {
 		usb.TivaTemp()
 		usb.DetectorTemp()
 		usb.DeviceStatus()
+		usb.ScanConfigCount()
+		usb.ActiveScanIndex()
 	}
 
 	usb.Close()

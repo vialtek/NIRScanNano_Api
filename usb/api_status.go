@@ -27,7 +27,7 @@ func SoftwareVersions() {
 	log.Println("Tiva version:", tivaVersion)
 	log.Println("DLPC version:", dlpcSWVersion)
 	log.Println("DLPC flash version:", dlpcFlashVersion)
-	log.Println("Spectrum library versuin:", specLibVersion)
+	log.Println("Spectrum library version:", specLibVersion)
 	log.Println("Calibration data version:", calDataVersion)
 	log.Println("Ref calibration data version:", refCalDataVersion)
 	log.Println("CFG data version:", cfgDataVersion)
