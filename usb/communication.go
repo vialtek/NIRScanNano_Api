@@ -4,7 +4,15 @@ import (
 	"log"
 )
 
-func readCommand(groupByte byte, commandByte byte) []byte {
+type Response struct {
+	flags   byte
+	seq     byte
+	length  byte
+	cmd     byte
+	payload []byte
+}
+
+func readCommand(groupByte byte, commandByte byte) *Response {
 	_, err := connection.device.Write([]byte{
 		0x00,
 		0xC0,
@@ -21,5 +29,15 @@ func readCommand(groupByte byte, commandByte byte) []byte {
 		log.Println("[USB] readCommand error:", err)
 	}
 
-	return bs
+	return NewResponse(bs)
+}
+
+func NewResponse(byteStream []byte) *Response {
+	return &Response{
+		flags:   byteStream[0],
+		seq:     byteStream[1],
+		length:  byteStream[2],
+		cmd:     byteStream[3],
+		payload: byteStream[4:],
+	}
 }
