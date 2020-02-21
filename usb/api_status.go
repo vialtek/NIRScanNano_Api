@@ -2,25 +2,15 @@ package usb
 
 import (
 	"encoding/binary"
-	"fmt"
 	"log"
+	"fmt"
 )
 
-func TivaTemp() {
-	response := readCommand(0x03, 0x0B)
-	temperature := binary.LittleEndian.Uint16(response.payload[0:4])
+func DeviceStatus() {
+	response := readCommand(0x04, 0x03)
+	status := binary.LittleEndian.Uint16(response.payload[0:4])
 
-	log.Println("Tiva Temperature:", temperature)
-}
-
-func DetectorTemp() {
-	response := readCommand(0x03, 0x00)
-
-	ambient := binary.LittleEndian.Uint16(response.payload[0:4])
-	detector := binary.LittleEndian.Uint16(response.payload[4:8])
-
-	log.Println("Ambient Temperature:", ambient)
-	log.Println("Detector Temperature:", detector)
+	log.Println("Device status:", status)
 }
 
 func SoftwareVersions() {

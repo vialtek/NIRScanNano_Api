@@ -22,7 +22,7 @@ func main() {
 	if usb.Connected() {
 		usb.TivaTemp()
 		usb.DetectorTemp()
-		usb.SoftwareVersions()
+		usb.DeviceStatus()
 	}
 
 	usb.Close()
