@@ -18,3 +18,7 @@ func ActiveScanIndex() {
 
 	log.Println("Active Scan Index:", index)	
 }
+
+func SetActiveScanIndex(index int){
+	writeCommand(0x02, 0x024, []byte{byte(index)})
+}

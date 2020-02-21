@@ -2,8 +2,8 @@ package usb
 
 import (
 	"encoding/binary"
-	"log"
 	"fmt"
+	"log"
 )
 
 func DeviceStatus() {

@@ -2,6 +2,7 @@ package usb
 
 import (
 	"log"
+	"time"
 )
 
 type Response struct {
@@ -30,6 +31,29 @@ func readCommand(groupByte byte, commandByte byte) *Response {
 	}
 
 	return NewResponse(bs)
+}
+
+func writeCommand(groupByte byte, commandByte byte, payload []byte) {
+	header := []byte {
+		0x00,
+		0x40,
+		0x00,
+		byte(len(payload) + 2),
+		0x00,
+		commandByte,
+		groupByte,
+	}
+
+	_, err := connection.device.Write(append(header, payload...))
+
+	time.Sleep(10 * time.Millisecond)
+
+	response := make([]byte, 100)
+	_, err = connection.device.Read(response)
+
+	if err != nil {
+		log.Println("[USB] writeCommand error:", err)
+	}
 }
 
 func NewResponse(byteStream []byte) *Response {
