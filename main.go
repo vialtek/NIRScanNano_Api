@@ -25,6 +25,7 @@ func main() {
 		usb.DeviceStatus()
 		usb.ScanConfigCount()
 		usb.ActiveScanIndex()
+		usb.ScanCompleted()
 	}
 
 	usb.Close()
