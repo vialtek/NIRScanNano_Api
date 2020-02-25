@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Response struct {
+type DeviceMessage struct {
 	flags   byte
 	seq     byte
 	length  byte
@@ -13,7 +13,7 @@ type Response struct {
 	payload []byte
 }
 
-func readCommand(groupByte byte, commandByte byte) *Response {
+func readCommand(groupByte byte, commandByte byte) *DeviceMessage {
 	_, err := connection.device.Write([]byte{
 		0x00,
 		0xC0,
@@ -30,7 +30,7 @@ func readCommand(groupByte byte, commandByte byte) *Response {
 		log.Println("[USB] readCommand error:", err)
 	}
 
-	return NewResponse(bs)
+	return NewDeviceMessage(bs)
 }
 
 func writeCommand(groupByte byte, commandByte byte, payload []byte) {
@@ -56,8 +56,8 @@ func writeCommand(groupByte byte, commandByte byte, payload []byte) {
 	}
 }
 
-func NewResponse(byteStream []byte) *Response {
-	return &Response{
+func NewDeviceMessage(byteStream []byte) *DeviceMessage {
+	return &DeviceMessage{
 		flags:   byteStream[0],
 		seq:     byteStream[1],
 		length:  byteStream[2],
