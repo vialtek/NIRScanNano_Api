@@ -34,7 +34,7 @@ func readCommand(groupByte byte, commandByte byte) *Response {
 }
 
 func writeCommand(groupByte byte, commandByte byte, payload []byte) {
-	header := []byte {
+	header := []byte{
 		0x00,
 		0x40,
 		0x00,
