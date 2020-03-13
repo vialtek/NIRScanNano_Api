@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/vialtek/NIRScanNano_Api/scan"
 	"github.com/vialtek/NIRScanNano_Api/usb"
 )
 
@@ -20,12 +21,7 @@ func main() {
 	}
 
 	if usb.Connected() {
-		usb.TivaTemp()
-		usb.DetectorTemp()
-		usb.DeviceStatus()
-		usb.ScanConfigCount()
-		usb.ActiveScanIndex()
-		usb.PerformScan(false)
+		scan.Scan()
 	}
 
 	usb.Close()

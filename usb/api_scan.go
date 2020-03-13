@@ -18,16 +18,18 @@ func InterpretScan() {
 	writeCommand(0x02, 0x39, []byte{})
 }
 
-func EstimatedScanTime() {
+func EstimatedScanTime() int {
 	response := readCommand(0x02, 0x37)
 	scanTime := binary.LittleEndian.Uint16(response.payload[0:4])
 
 	log.Println("Estimated Scan Time:", scanTime)
+	return int(scanTime)
 }
 
-func ScanCompleted() {
+func ScanCompleted() bool {
 	response := readCommand(0x02, 0x19)
 	scanCompleted := response.payload[0]
 
 	log.Println("Scan Completed:", scanCompleted)
+	return scanCompleted == 1
 }
