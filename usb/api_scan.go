@@ -33,3 +33,17 @@ func ScanCompleted() bool {
 	log.Println("Scan Completed:", scanCompleted)
 	return scanCompleted == 1
 }
+
+func GetFileSize() {
+	response := readCommand(0x00, 0x2D)
+	fileSize := binary.LittleEndian.Uint16(response.payload[0:4])
+
+	log.Println("File Size:", fileSize)
+}
+
+func GetFileData() {
+	response := readCommand(0x00, 0x2E)
+	data := response.payload
+
+	log.Println("File Data:", data)
+}
