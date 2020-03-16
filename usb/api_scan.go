@@ -34,16 +34,19 @@ func ScanCompleted() bool {
 	return scanCompleted == 1
 }
 
-func GetFileSize() {
-	response := readCommand(0x00, 0x2D, []byte{})
+func GetFileSize(fileType byte) int {
+	response := readCommand(0x00, 0x2D, []byte{fileType})
 	fileSize := binary.LittleEndian.Uint16(response.payload[0:4])
 
 	log.Println("File Size:", fileSize)
+
+	return int(fileSize)
 }
 
-func GetFileData() {
+func GetFileData() []byte {
 	response := readCommand(0x00, 0x2E, []byte{})
 	data := response.payload
 
-	log.Println("File Data:", data)
+	log.Println(response)
+	return data
 }

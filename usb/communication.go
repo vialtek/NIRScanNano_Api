@@ -48,7 +48,7 @@ func writeCommand(groupByte byte, commandByte byte, payload []byte) {
 
 	time.Sleep(10 * time.Millisecond)
 
-	response := make([]byte, 100)
+	response := make([]byte, 64)
 	_, err = connection.device.Read(response)
 
 	if err != nil {

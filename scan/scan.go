@@ -25,11 +25,10 @@ func performScan() {
 		if usb.ScanCompleted() {
 			break
 		}
-		time.Sleep(50 * time.Millisecond)
+		time.Sleep(25 * time.Millisecond)
 	}
 }
 
 func downloadScan() {
-	usb.GetFileSize()
-	usb.GetFileData()
+	loadScanData()
 }
