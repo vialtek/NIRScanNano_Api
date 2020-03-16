@@ -7,14 +7,14 @@ import (
 )
 
 func DeviceStatus() {
-	response := readCommand(0x04, 0x03)
+	response := readCommand(0x04, 0x03, []byte{})
 	status := binary.LittleEndian.Uint16(response.payload[0:4])
 
 	log.Println("Device status:", status)
 }
 
 func SoftwareVersions() {
-	response := readCommand(0x02, 0x16)
+	response := readCommand(0x02, 0x16, []byte{})
 
 	tivaVersion := fmt.Sprintf("%v.%v.%v", response.payload[2], response.payload[1], response.payload[0])
 	dlpcSWVersion := fmt.Sprintf("%v.%v.%v", response.payload[7], response.payload[6], response.payload[5])

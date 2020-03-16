@@ -19,7 +19,7 @@ func InterpretScan() {
 }
 
 func EstimatedScanTime() int {
-	response := readCommand(0x02, 0x37)
+	response := readCommand(0x02, 0x37, []byte{})
 	scanTime := binary.LittleEndian.Uint16(response.payload[0:4])
 
 	log.Println("Estimated Scan Time:", scanTime)
@@ -27,7 +27,7 @@ func EstimatedScanTime() int {
 }
 
 func ScanCompleted() bool {
-	response := readCommand(0x02, 0x19)
+	response := readCommand(0x02, 0x19, []byte{})
 	scanCompleted := response.payload[0]
 
 	log.Println("Scan Completed:", scanCompleted)
@@ -35,14 +35,14 @@ func ScanCompleted() bool {
 }
 
 func GetFileSize() {
-	response := readCommand(0x00, 0x2D)
+	response := readCommand(0x00, 0x2D, []byte{})
 	fileSize := binary.LittleEndian.Uint16(response.payload[0:4])
 
 	log.Println("File Size:", fileSize)
 }
 
 func GetFileData() {
-	response := readCommand(0x00, 0x2E)
+	response := readCommand(0x00, 0x2E, []byte{})
 	data := response.payload
 
 	log.Println("File Data:", data)

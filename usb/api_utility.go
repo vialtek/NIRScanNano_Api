@@ -18,14 +18,14 @@ func SetHibernateMode(enabled bool) {
 }
 
 func HibernateMode() {
-	response := readCommand(0x03, 0x0F)
+	response := readCommand(0x03, 0x0F, []byte{})
 	hibernate := response.payload[0]
 
 	log.Println("Hibernate Mode:", hibernate)
 }
 
 func PgaGain() {
-	response := readCommand(0x02, 0x28)
+	response := readCommand(0x02, 0x28, []byte{})
 	gain := response.payload[0]
 
 	log.Println("PGA Gain:", gain)

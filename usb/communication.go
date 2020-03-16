@@ -13,7 +13,7 @@ type DeviceMessage struct {
 	payload []byte
 }
 
-func readCommand(groupByte byte, commandByte byte) *DeviceMessage {
+func readCommand(groupByte byte, commandByte byte, payload []byte) *DeviceMessage {
 	_, err := connection.device.Write([]byte{
 		0x00,
 		0xC0,
