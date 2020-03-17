@@ -21,6 +21,9 @@ func main() {
 	}
 
 	if usb.Connected() {
+		usb.ScanConfigCount()
+		usb.SetActiveScanIndex(0)
+		usb.ActiveScanIndex()
 		scan.Scan()
 	}
 

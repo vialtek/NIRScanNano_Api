@@ -20,5 +20,9 @@ func ActiveScanIndex() {
 }
 
 func SetActiveScanIndex(index int) {
-	writeCommand(0x02, 0x024, []byte{byte(index)})
+	writeCommand(0x02, 0x24, []byte{byte(index)})
+}
+
+func EraseStoredScanConfigs() {
+	writeCommand(0x02, 0x21, []byte{})
 }
